@@ -1,75 +1,168 @@
+"use client"
+
+import React, { useState } from 'react';
 export default function Header() {
+  const [selectedBook, setSelectedBook] = useState('');
 
 
+
+
+  const handleBookChange =(event)=>{
+    const selectedValue = event.target.value;
+    console.log(selectedValue);
+    setSelectedBook(selectedValue);
+    const numberOfChapters = authors[selectedValue];
+    localStorage.setItem('author', selectedValue)
+    localStorage.setItem('chapters', numberOfChapters)
+    console.log(numberOfChapters);
+  }
+
+  const style = {
+    select_book: {
+      padding: '10px 30px 10px 30px',
+      cursor: 'pointer',
+
+    }
+  }
 
   const books = [
-    { key: 'GEN', value: 'Genesis' },
-    { key: 'EXO', value: 'Exodus' },
-    { key: 'LEV', value: 'Leviticus' },
-    { key: 'NUM', value: 'Numbers' },
-    { key: 'DEU', value: 'Deuteronomy' },
-    { key: 'JOS', value: 'Joshua' },
-    { key: 'JDG', value: 'Judges' },
-    { key: 'RUT', value: 'Ruth' },
-    { key: '1SA', value: '1 Samuel' },
-    { key: '2SA', value: '2 Samuel' },
-    { key: '1KI', value: '1 Kings' },
-    { key: '2KI', value: '2 Kings' },
-    { key: '1CH', value: '1 Chronicles' },
-    { key: '2CH', value: '2 Chronicles' },
-    { key: 'EZR', value: 'Ezra' },
-    { key: 'NEH', value: 'Nehemiah' },
-    { key: 'EST', value: 'Esther' },
-    { key: 'JOB', value: 'Job' },
-    { key: 'PSA', value: 'Psalms' },
-    { key: 'PRO', value: 'Proverbs' },
-    { key: 'ECC', value: 'Ecclesiastes' },
-    { key: 'SNG', value: 'Song of Songs' },
-    { key: 'ISA', value: 'Isaiah' },
-    { key: 'JER', value: 'Jeremiah' },
-    { key: 'LAM', value: 'Lamentations' },
-    { key: 'EZK', value: 'Ezekiel' },
-    { key: 'DAN', value: 'Daniel' },
-    { key: 'HOS', value: 'Hosea' },
-    { key: 'JOL', value: 'Joel' },
-    { key: 'AMO', value: 'Amos' },
-    { key: 'OBA', value: 'Obadiah' },
-    { key: 'JON', value: 'Jonah' },
-    { key: 'MIC', value: 'Micah' },
-    { key: 'NAM', value: 'Nahum' },
-    { key: 'HAB', value: 'Habakkuk' },
-    { key: 'ZEP', value: 'Zephaniah' },
-    { key: 'HAG', value: 'Haggai' },
-    { key: 'ZEC', value: 'Zechariah' },
-    { key: 'MAL', value: 'Malachi' },
-    { key: 'MAT', value: 'Matthew' },
-    { key: 'MRK', value: 'Mark' },
-    { key: 'LUK', value: 'Luke' },
-    { key: 'JHN', value: 'John' },
-    { key: 'ACT', value: 'Acts' },
-    { key: 'ROM', value: 'Romans' },
-    { key: '1CO', value: '1 Corinthians' },
-    { key: '2CO', value: '2 Corinthians' },
-    { key: 'GAL', value: 'Galatians' },
-    { key: 'EPH', value: 'Ephesians' },
-    { key: 'PHP', value: 'Philippians' },
-    { key: 'COL', value: 'Colossians' },
-    { key: '1TH', value: '1 Thessalonians' },
-    { key: '2TH', value: '2 Thessalonians' },
-    { key: '1TI', value: '1 Timothy' },
-    { key: '2TI', value: '2 Timothy' },
-    { key: 'TIT', value: 'Titus' },
-    { key: 'PHM', value: 'Philemon' },
-    { key: 'HEB', value: 'Hebrews' },
-    { key: 'JAS', value: 'James' },
-    { key: '1PE', value: '1 Peter' },
-    { key: '2PE', value: '2 Peter' },
-    { key: '1JN', value: '1 John' },
-    { key: '2JN', value: '2 John' },
-    { key: '3JN', value: '3 John' },
-    { key: 'JUD', value: 'Jude' },
-    { key: 'REV', value: 'Revelation' },
+    { id: '0', key: 'title', value: 'SelectBook' },
+    { id: '1', key: 'GEN', value: 'Genesis' },
+    { id: '2', key: 'EXO', value: 'Exodus' },
+    { id: '3', key: 'LEV', value: 'Leviticus' },
+    { id: '4', key: 'NUM', value: 'Numbers' },
+    { id: '5', key: 'DEU', value: 'Deuteronomy' },
+    { id: '6', key: 'JOS', value: 'Joshua' },
+    { id: '7', key: 'JDG', value: 'Judges' },
+    { id: '8', key: 'RUT', value: 'Ruth' },
+    { id: '9', key: '1SA', value: '1 Samuel' },
+    { id: '10', key: '2SA', value: '2 Samuel' },
+    { id: '11', key: '1KI', value: '1 Kings' },
+    { id: '12', key: '2KI', value: '2 Kings' },
+    { id: '13', key: '1CH', value: '1 Chronicles' },
+    { id: '14', key: '2CH', value: '2 Chronicles' },
+    { id: '15', key: 'EZR', value: 'Ezra' },
+    { id: '16', key: 'NEH', value: 'Nehemiah' },
+    { id: '17', key: 'EST', value: 'Esther' },
+    { id: '18', key: 'JOB', value: 'Job' },
+    { id: '19', key: 'PSA', value: 'Psalms' },
+    { id: '20', key: 'PRO', value: 'Proverbs' },
+    { id: '21', key: 'ECC', value: 'Ecclesiastes' },
+    { id: '22', key: 'SNG', value: 'Song of Songs' },
+    { id: '23', key: 'ISA', value: 'Isaiah' },
+    { id: '24', key: 'JER', value: 'Jeremiah' },
+    { id: '25', key: 'LAM', value: 'Lamentations' },
+    { id: '26', key: 'EZK', value: 'Ezekiel' },
+    { id: '27', key: 'DAN', value: 'Daniel' },
+    { id: '28', key: 'HOS', value: 'Hosea' },
+    { id: '29', key: 'JOL', value: 'Joel' },
+    { id: '30', key: 'AMO', value: 'Amos' },
+    { id: '31', key: 'OBA', value: 'Obadiah' },
+    { id: '32', key: 'JON', value: 'Jonah' },
+    { id: '33', key: 'MIC', value: 'Micah' },
+    { id: '34', key: 'NAM', value: 'Nahum' },
+    { id: '35', key: 'HAB', value: 'Habakkuk' },
+    { id: '36', key: 'ZEP', value: 'Zephaniah' },
+    { id: '37', key: 'HAG', value: 'Haggai' },
+    { id: '38', key: 'ZEC', value: 'Zechariah' },
+    { id: '39', key: 'MAL', value: 'Malachi' },
+    { id: '40', key: 'MAT', value: 'Matthew' },
+    { id: '41', key: 'MRK', value: 'Mark' },
+    { id: '42', key: 'LUK', value: 'Luke' },
+    { id: '43', key: 'JHN', value: 'John' },
+    { id: '44', key: 'ACT', value: 'Acts' },
+    { id: '45', key: 'ROM', value: 'Romans' },
+    { id: '46', key: '1CO', value: '1 Corinthians' },
+    { id: '47', key: '2CO', value: '2 Corinthians' },
+    { id: '48', key: 'GAL', value: 'Galatians' },
+    { id: '49', key: 'EPH', value: 'Ephesians' },
+    { id: '50', key: 'PHP', value: 'Philippians' },
+    { id: '51', key: 'COL', value: 'Colossians' },
+    { id: '52', key: '1TH', value: '1 Thessalonians' },
+    { id: '53', key: '2TH', value: '2 Thessalonians' },
+    { id: '54', key: '1TI', value: '1 Timothy' },
+    { id: '55', key: '2TI', value: '2 Timothy' },
+    { id: '56', key: 'TIT', value: 'Titus' },
+    { id: '57', key: 'PHM', value: 'Philemon' },
+    { id: '58', key: 'HEB', value: 'Hebrews' },
+    { id: '59', key: 'JAS', value: 'James' },
+    { id: '60', key: '1PE', value: '1 Peter' },
+    { id: '61', key: '2PE', value: '2 Peter' },
+    { id: '62', key: '1JN', value: '1 John' },
+    { id: '63', key: '2JN', value: '2 John' },
+    { id: '64', key: '3JN', value: '3 John' },
+    { id: '65', key: 'JUD', value: 'Jude' },
+    { id: '66', key: 'REV', value: 'Revelation' },
   ]
+
+  const authors = {
+    Genesis:50,
+    Exodus:40,
+    Leviticus:27,
+    Numbers:36,
+    Deuteronomy: 34,
+    Joshua:24,
+    Judges:21,
+    Ruth: 4,
+    FirstSamuel: 31,
+    SecondSamuel: 24,
+    FirstKings: 22,
+    SecondKings: 25,
+    FirstChronicles: 29,
+    SecondChronicles: 36,
+    Ezra: 10,
+    Nehemiah: 13,
+    Esther: 10,
+    Job: 42,
+    Psalms:150,
+    Proverbs: 31,
+    Ecclesiastes: 12,
+    SongOfSongs: 8,
+    Isaiah: 66,
+    Jeremiah: 52,
+    Lamentations: 5,
+    Ezekiel: 48,
+    Daniel: 12,
+    Hosea: 14,
+    Joel: 3,
+    Amos: 9,
+    Obadiah: 1,
+    Jonah: 4,
+    Micah: 7,
+    Nahum: 3,
+    Habakkuk: 3,
+    Zephaniah:3,
+    Haggai: 2,
+    Zechariah: 14,
+    Malachi: 4,
+    Matthew: 28,
+    Mark: 16,
+    Luke: 24,
+    John: 21,
+    Acts: 28,
+    Romans: 16,
+    FirstCorinthians: 16,
+    SecondCorinthians: 13,
+    Galatians: 6,
+    Ephesians: 6,
+    Philippians: 4,
+    Colossians: 4,
+    FirstThessalonians: 5,
+    SecondThessalonians: 3,
+    FirstTimothy: 6,
+    SecondTimothy: 4,
+    Titus: 3,
+    Philemon: 1,
+    Hebrews: 13,
+    James: 5,
+    FirstPeter: 5,
+    SecondPeter: 3,
+    FirstJohn: 5,
+    SecondJohn: 1,
+    ThirdJohan: 1,
+    Jude: 1,
+    Revelation: 22,
+  }
 
 
 
@@ -104,14 +197,17 @@ export default function Header() {
                 <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</a>
               </li>
             </ul>
-            <form className="d-flex">
-              <select name="" id="">
-                <option value="" selected>Select Book</option>
-                <option value="">Genesis</option>
-                <option value="">Genesis</option>
-                <option value="">Genesis</option>
-                <option value="">Genesis</option>
+            <form className="">
+              <select id="selectOption" name="selectOption" onChange={handleBookChange} value={selectedBook} className="select_book" style={style.select_book}>
+                {
+                  books.map((book) => {
+                    return (
+                      <option key={book.id} value={book.value}>{book.value}</option>
+                    )
+                  })
+                }
               </select>
+
             </form>
           </div>
         </div>
