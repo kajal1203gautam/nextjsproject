@@ -3,15 +3,18 @@ import { useParams } from "next/navigation";
 import ChapterName from "./ChapterName";
 import Verse from "./verse";
 import { useState,useEffect } from "react";
-
+import { useContext } from 'react';
+import { BookContext } from "@/app/context/bookContext";
 
 export default function Chapter() {
   const [chapterData, setChapterData] = useState({});
-
+  const{state, dispatch} = useContext(BookContext);
+  console.log(state, 'dsdjskjsl');
   const {id} = useParams();
+  console.log(state.bookName, 'f')
   async function fetchChapter() {
     try {
-        const response = await fetch(`https://bible-api.com/john+${id}?translation=kjv`)
+        const response = await fetch(`https://bible-api.com/${state.bookName}+${id}?translation=kjv`)
         const data = await response.json()
         // const {verses} = data;
         console.log(data, 'data ')
@@ -23,11 +26,11 @@ export default function Chapter() {
 }
 useEffect(() => {
     fetchChapter();
-}, [])
+}, [state.bookName])
   return (
     <>
       <div className="main-wrapper">
-        <ChapterName id={id} data={chapterData} />
+        <ChapterName id={id} data={chapterData} text={chapterData} />
         <section className="verse-section">
            <div className="container">
             <div className="verse-tools">
@@ -37,7 +40,8 @@ useEffect(() => {
                             <h4 className="mb-0">{chapterData?.verses?.length} Verses</h4>
                         </div>
                         <div className="ver-tool-section">
-                            <button className="btn btn-secondary">Short <i className="fs-arrow-up-wide-short"></i></button>
+                        <i class="fa-solid fa-check"></i>
+                            <button className="btn btn-secondary">Short <i className="fa-solid fa-arrow-down-9-1"></i></button>
                         </div>
                     </div>
                 </div>

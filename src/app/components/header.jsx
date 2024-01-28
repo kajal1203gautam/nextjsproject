@@ -1,22 +1,26 @@
 "use client"
-
+import { useContext } from 'react';
+import { BookContext } from '../context/bookContext';
 import React, { useState } from 'react';
+import Link from 'next/link';
+
 export default function Header() {
   const [selectedBook, setSelectedBook] = useState('');
 
-
-
-
+  const{state, dispatch} = useContext(BookContext);
+  console.log(state, 'state');
   const handleBookChange =(event)=>{
     const selectedValue = event.target.value;
+    const numberOfChapters = authors[selectedValue];
+    dispatch({type:'UPDATE_SELECTED_BOOK', chapter:numberOfChapters, payload: selectedValue})
+    console.log(state,'erete');
     console.log(selectedValue);
     setSelectedBook(selectedValue);
-    const numberOfChapters = authors[selectedValue];
-    localStorage.setItem('author', selectedValue)
-    localStorage.setItem('chapters', numberOfChapters)
-    console.log(numberOfChapters);
+   
+    // localStorage.setItem('author', selectedValue)
+    // localStorage.setItem('chapters', numberOfChapters)
+    // console.log(numberOfChapters);
   }
-
   const style = {
     select_book: {
       padding: '10px 30px 10px 30px',
@@ -24,7 +28,6 @@ export default function Header() {
 
     }
   }
-
   const books = [
     { id: '0', key: 'title', value: 'SelectBook' },
     { id: '1', key: 'GEN', value: 'Genesis' },
@@ -94,7 +97,6 @@ export default function Header() {
     { id: '65', key: 'JUD', value: 'Jude' },
     { id: '66', key: 'REV', value: 'Revelation' },
   ]
-
   const authors = {
     Genesis:50,
     Exodus:40,
@@ -170,7 +172,7 @@ export default function Header() {
     <>
       <nav className="navbar navbar-expand-lg nav-bg-color">
         <div className="container">
-          <a className="navbar-brand" href="#">Bible</a>
+          <Link  className="navbar-brand" href={"/"}>Bible</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -188,7 +190,8 @@ export default function Header() {
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <li><a className=
+                  "dropdown-item" href="#">Another action</a></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="#">Something else here</a></li>
                 </ul>

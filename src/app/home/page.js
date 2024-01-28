@@ -1,18 +1,30 @@
 'use client'
 import { useState, useEffect, React } from "react";
 import Link from "next/link";
+import { useContext } from 'react';
+import { BookContext } from '../context/bookContext';
 
 
 
 
-export default function Home({selectedBook}) {
+export default function Home() {
+    // const [sharedData, setSharedData] = useState({ selectedValue })
+    const{state, dispatch} = useContext(BookContext);
+    console.log(state, 'home page')
     const styles = {
-        chapter_card:{
+        chapter_card: {
             backgroundColor: 'gray',
             color: "#fff",
             border: "0"
         }
     }
+
+   
+//     const storedAuthor = localStorage.getItem('author', selectedValue)
+//     const storedChapters = localStorage.getItem('chapters', numberOfChapters)
+// console.log(storedAuthor, 'author')
+// console.log(storedChapters, 'chapters')
+
 
     const chapterArray = [
         {
@@ -105,19 +117,19 @@ export default function Home({selectedBook}) {
             <div className="container mt-5">
                 <div className="row">
                     {
-                        chapterArray.map((item, index) => {
-                            return (
-                                <div className="col-lg-4 mb-4">
-                                    <Link href={`/chapter/${item.id}`}>
-                                        <div className="card" style={styles.chapter_card}>
-                                            <div className="card-body">
-                                                <h5 className="card-title">{item.name}</h5>
+                        Array.from(Array(state.chapters).keys()).map((chapter, index) => {
+                                return (
+                                    <div className="col-lg-4 mb-4" key={chapter}> 
+                                        <Link href={`/chapter/${chapter+1}`}>
+                                            <div className="card" style={styles.chapter_card}>
+                                                <div className="card-body">
+                                                    <h5 className="card-title">chapter {chapter+1}</h5>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Link>
-                                </div>
-                            )
-                        })
+                                        </Link>
+                                    </div>
+                                )
+                            })
                     }
                 </div>
             </div >

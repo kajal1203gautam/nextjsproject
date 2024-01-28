@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
+import { BookProvider } from './context/bookContext'
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,10 +15,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head>
+      <script src="https://kit.fontawesome.com/18a25b055d.js" crossorigin="anonymous"></script>
+
+      </Head>
       <body className={inter.className}>
-        <Header />
-        {children}
-        </body>
+        <BookProvider>
+          <Header />
+          {children}
+        </BookProvider>
+      </body>
     </html>
   );
 }
